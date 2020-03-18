@@ -23,10 +23,6 @@ ans = []
 st = -1
 go = -1
 for i in range(len(s)):
-    if st == -1 and bo[i] == True:
-        st = i
-        continue
-    if st != -1 and bo[i] != True:
     if dp[i] in sub:
         sub.remove(dp[i])
         go = i
