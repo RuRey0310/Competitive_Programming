@@ -2,52 +2,46 @@ s = list(input())
 n = int(input())
 lr = [list(map(int, list(input().split()))) for i in range(n)]
 
-ss = [-1] * len(s)
+lr.sort(key = lambda x: x[0])
+
+dp = [-1] * len(s)
+cnt = 0
 for i in range(n):
-    if ss[lr[i][0] - 1] != -1:
-        ss[lr[i][0] - 1] = [ss[lr[i][0] - 1], i]
+    if dp[lr[i][0] - 1] != -1:
+        dp[lr[i][0] - 1] = -1
+        cnt -= 1
     else:
-        ss[lr[i][0] - 1] = i
-    if ss[lr[i][1] - 1] != -1:
-        ss[lr[i][1] - 1] = [ss[lr[i][1] - 1], i]
+        dp[lr[i][0] - 1] = cnt
+    if dp[lr[i][1] - 1] != -1:
+        dp[lr[i][1] - 1] = -1
     else:
-        ss[lr[i][1] - 1] = i
+        dp[lr[i][1] - 1] = cnt
+        cnt += 1
 
-bo = [False] * len(s)
-a = []
-for i in range(len(s)):
-    if len(a) != 0 and ss[i] == -1:
-        bo[i] = True
-    elif len(a) != 0 and ss[i] in a:
-        a.remove(ss[i])
-        bo[i] = True
-    elif ss[i] != -1:
-        a.append(ss[i])
-        bo[i] = True
-
+sub = []
+ans = []
 st = -1
 go = -1
-ans = []
 for i in range(len(s)):
     if st == -1 and bo[i] == True:
         st = i
         continue
     if st != -1 and bo[i] != True:
-        go = i - 1
-        sub = s[st: go + 1]
-        sub.sort()
-        ans += sub
-        ans += s[i]
+    if dp[i] in sub:
+        sub.remove(dp[i])
+        go = i
+    elif dp[i] != -1:
+        sub.append(dp[i])
+        if st == -1:
+            st = i
+    if len(sub) == 0 and st != -1 and go != -1:
+        d = s[st: go + 1]
+        d.sort()
+        ans += d
         st = -1
         go = -1
-        continue
-    if st == -1 and bo[i] == False:
+    if dp[i] == -1 and st == -1:
         ans.append(s[i])
-    if st != -1 and bo[i] == True and i == (len(s) - 1):
-        go = i
-        sub = s[st: go + 1]
-        sub.sort()
-        ans += sub
 
 ans = ''.join(ans)
 print(ans)
