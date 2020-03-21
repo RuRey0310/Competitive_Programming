@@ -1,7 +1,8 @@
-import math
 a, b, c = map(int, input().split())
 
-if (pow(a,0.5)+pow(b,0.5)) < pow(c,0.5):
+d = c - a - b
+
+if d > 0 and (d * d) > (4 * a * b):
     print("Yes")
 else:
     print("No")
