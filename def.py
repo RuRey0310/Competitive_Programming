@@ -94,6 +94,30 @@ def dfs(i, j):
     dfs(i + 1, j)
     dfs(i - 1, j)
 
+#幅優先探索
+import queue
+tf = [[]]
+ans = []
+voi = []
+def bfs(v):
+    q = queue.Queue()
+    q.put([v, 0, v])
+    voi[v] = True
+    while not q.empty():
+        sub = q.get()
+        now = sub[0]
+        depth = sub[1]
+        before = sub[2]
+        if tf[now][v] == False:
+            ans[depth] += 1
+            tf[now][v] = True
+            tf[v][now] = True
+        for next in graph[now]:
+            if voi[next]:
+                continue
+            voi[next] = True
+            q.put([next, depth + 1, now])
+
 #二分探索
 def binary_search(a,x):
     # a=list,x=値
