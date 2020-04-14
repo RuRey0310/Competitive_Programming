@@ -139,3 +139,15 @@ for _ in range(n):
     u, v = map(int, input().split())
     graph[u].append(v)
     graph[v].append(u)
+
+#　優先度付きキュー
+import heapq
+ab = []
+k = 0
+heapq.heapify(ab)
+ans = 0
+for i in range(k):
+    sub = heapq.heappop(ab)
+    ans += sub[0]
+    sub[0] += sub[1]
+    heapq.heappush(ab, sub)
