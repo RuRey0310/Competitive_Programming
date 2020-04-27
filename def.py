@@ -1,13 +1,9 @@
 #最大公約数
-def gcd(a, b):
-    while b!=0:
-        a,b=b,a%b
-    return a
-
 #最小公倍数
-def lcm(a,b):
-    return a * b // gcd(a, b)
-    
+import math
+math.gcd()
+math.lcm()
+
 #sort 昇順、降順 二次元配列
 a=[]
 a.sort(key = lambda x: x[1])
@@ -16,10 +12,6 @@ a.sort(key = lambda x: x[1] , reverse = True)
 #正の無限大,負の無限大
 x = float("inf")
 y = float("-inf")
-
-#for文降順
-n=0
-for i in reversed(range(n + 1)): continue
 
 #bit全列挙
 n = 2
@@ -119,6 +111,11 @@ def bfs(v):
             q.put([next, depth + 1, now])
 
 #二分探索
+import bisect
+a = [1, 3, 5, 7, 9, 11, 13, 15, 17]
+x = 4
+insert_index = bisect.bisect_left(a, x)
+a.insert(insert_index, x)
 def binary_search(a,x):
     # a=list,x=値
     left = 0
@@ -151,3 +148,52 @@ for i in range(k):
     ans += sub[0]
     sub[0] += sub[1]
     heapq.heappush(ab, sub)
+
+#Union Find
+# https://note.nkmk.me/python-union-find/
+class UnionFind():
+    def __init__(self, n):
+        self.n = n
+        self.parents = [-1] * n
+
+    def find(self, x):
+        if self.parents[x] < 0:
+            return x
+        else:
+            self.parents[x] = self.find(self.parents[x])
+            return self.parents[x]
+
+    def union(self, x, y):
+        x = self.find(x)
+        y = self.find(y)
+
+        if x == y:
+            return
+
+        if self.parents[x] > self.parents[y]:
+            x, y = y, x
+
+        self.parents[x] += self.parents[y]
+        self.parents[y] = x
+
+    def size(self, x):
+        return -self.parents[self.find(x)]
+
+    def same(self, x, y):
+        return self.find(x) == self.find(y)
+
+    def members(self, x):
+        root = self.find(x)
+        return [i for i in range(self.n) if self.find(i) == root]
+
+    def roots(self):
+        return [i for i, x in enumerate(self.parents) if x < 0]
+
+    def group_count(self):
+        return len(self.roots())
+
+    def all_group_members(self):
+        return {r: self.members(r) for r in self.roots()}
+
+    def __str__(self):
+        return '\n'.join('{}: {}'.format(r, self.members(r)) for r in self.roots())
