@@ -9,9 +9,9 @@ a=[]
 a.sort(key = lambda x: x[1])
 a.sort(key = lambda x: x[1] , reverse = True)
 
-#正の無限大,負の無限大
-x = float("inf")
-y = float("-inf")
+#辞書1から
+from collections import defaultdict
+d = defaultdict(int)
 
 #bit全列挙
 n = 2
@@ -20,9 +20,6 @@ for i in range(2 ** n):
     for j in range(n):
         if((i >> j) & 1):
             switch[j] = 1
-
-#絶対値
-abs(n)
 
 #アスキーコード
 ord("a")
@@ -45,9 +42,6 @@ for i in range(2, MAX):
         while j < MAX:
             is_prime[j] = False
             j += i
-
-#辞書型
-d = {"a": 1, "b": 2}
 
 #スタック push pop
 class stack:
@@ -156,14 +150,14 @@ class UnionFind():
         self.n = n
         self.parents = [-1] * n
 
-    def find(self, x):
+    def find(self, x):  #要素xが属するグループの根を返す
         if self.parents[x] < 0:
             return x
         else:
             self.parents[x] = self.find(self.parents[x])
             return self.parents[x]
 
-    def union(self, x, y):
+    def union(self, x, y):  #要素xが属するグループと要素yが属するグループを併合
         x = self.find(x)
         y = self.find(y)
 
@@ -176,20 +170,20 @@ class UnionFind():
         self.parents[x] += self.parents[y]
         self.parents[y] = x
 
-    def size(self, x):
+    def size(self, x):  #グループのサイズ
         return -self.parents[self.find(x)]
 
-    def same(self, x, y):
+    def same(self, x, y):   #要素xと要素yが同じグループかどうか
         return self.find(x) == self.find(y)
 
-    def members(self, x):
+    def members(self, x):   #要素xが属するグループに属する要素をリストで返す
         root = self.find(x)
         return [i for i in range(self.n) if self.find(i) == root]
 
-    def roots(self):
+    def roots(self):    #すべての根の要素をリストで返す
         return [i for i, x in enumerate(self.parents) if x < 0]
 
-    def group_count(self):
+    def group_count(self):  #グループの数を変えす
         return len(self.roots())
 
     def all_group_members(self):
