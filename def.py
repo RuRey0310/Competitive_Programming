@@ -13,6 +13,20 @@ a.sort(key = lambda x: x[1] , reverse = True)
 from collections import defaultdict
 d = defaultdict(int)
 
+#長さnの数列1~mまで重複あり順列
+import itertools
+n,m = 0,0
+for i in itertools.combinations_with_replacement(range(1, m + 1), n):
+    print(i)
+
+#累積和
+ary = [1, 3, 5, 7, 9]
+cumsum = itertools.accumulate(ary) #print(list(cumsum))
+
+#順列と組み合わせ
+print(list(itertools.permutations([1, 2, 3])))      #[(1,2,3),(1,3,2),(2,1,3),,,]
+print(list(itertools.combinations([1, 2, 3], 2)))   #[(1,2),(1,3),(2,3)]
+
 #bit全列挙
 n = 2
 for i in range(2 ** n):
