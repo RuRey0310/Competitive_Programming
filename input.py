@@ -1,3 +1,17 @@
+#デフォルト
+import itertools
+from collections import defaultdict
+import collections
+import sys
+sys.setrecursionlimit(200000)
+mod = 1000000007
+
+n = int(input())
+a, b = map(int, input().split())
+a = list(map(int,input().split()))
+a = [int(input()) for i in range(n)]
+ab = [list(map(int, input().split())) for i in range(n)]
+
 #標準入力
 a = int(input())
 
