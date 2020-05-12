@@ -119,6 +119,7 @@ def dfs(i, j):
 
 #幅優先探索
 import queue
+graph = []
 tf = [[]]
 ans = []
 voi = []
@@ -160,13 +161,6 @@ def binary_search(a,x):
         else:
             left = mid + 1
     return False
-
-# graph作成
-graph = {i: [] for i in range(1, n + 1)}
-for _ in range(n):
-    u, v = map(int, input().split())
-    graph[u].append(v)
-    graph[v].append(u)
 
 #　優先度付きキュー
 import heapq
