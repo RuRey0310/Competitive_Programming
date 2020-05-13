@@ -246,3 +246,6 @@ def dijkstra(s):
             if used[e[1]]:
                 heapq.heappush(edgelist,[e[0]+d[v],e[1]])
     return d
+
+#5~100の和
+(5+100) * 95 // 2 
