@@ -15,7 +15,7 @@ ab = [list(map(int, input().split())) for i in range(n)]
 
 # graph作成
 graph = {i: [] for i in range(1, n + 1)}
-for _ in range(n):
+for _ in range(m):
     u, v = map(int, input().split())
     graph[u].append(v)
     graph[v].append(u)
