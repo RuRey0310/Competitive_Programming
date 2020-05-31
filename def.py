@@ -63,8 +63,10 @@ print(COM(100000, 50000))
 
 #素数
 def Prime(n):
-    for p in range(2, n):
-        if n % p == 0:
+    if n == 1:
+        return False
+    for i in range(2,int(n**0.5)+1):
+        if n % i == 0:
             return False
     return True
 
